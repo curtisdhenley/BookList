@@ -62,15 +62,39 @@ class UI {
     <td>${book.title}</td>
     <td>${book.author}</td>
     <td>${book.isbn}</td>
-    <td></td>
-    `
+    <td><a href="#" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"><i/></a></td>
+    `;
+    list.appendChild(row);
+  }
+
+  static clearFields() {
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("isbn").value = "";
   }
 }
 
 // local storage class - will handle local storage
 
 // event - will display books
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 // event - will add books
+document.getElementById("submitBtn").addEventListener("click", (event) => {
+    event.preventDefault();
+    // get input values
+    let title = document.getElementById("title").value;
+    let author = document.getElementById("author").value;
+    let isbn = document.getElementById("isbn").value;
+
+    // create book instance
+    const book = new Book(title, author, isbn);
+
+    // add new instance to page and local storage
+    UI.addBookToList(book);
+    
+    // clear input field after submit
+    UI.clearFields();
+})
 
 // event - will remove book both on page and in storage
