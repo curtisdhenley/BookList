@@ -30,7 +30,6 @@ class UI {
 
   static deleteBook(target) {
     if (target.classList.contains("delete")) {
-        target.classList.add("fall");
       target.parentElement.parentElement.remove();
     }
   }
